@@ -14,11 +14,53 @@ Core views:
 
 ## Quick Start
 
-1. Read `skill/promptforge/SKILL.md`.
+1. Read `.agents/skills/promptforge/SKILL.md`.
 2. Start from a vague request, such as "help me make a senior-looking PPT".
 3. Follow the Skill workflow to classify the task, extract missing information, make safe assumptions, draft, critique, revise, and run risk checks.
 4. Return a final prompt with a verification checklist and confirmation gate.
 5. Run the local linter against examples or generated prompt files.
+
+## Codex Repo-Local Use
+
+Clone this repository and start Codex from the repository root. The repo-local Skill lives at:
+
+```text
+.agents/skills/promptforge/
+```
+
+You can explicitly ask Codex to use PromptForge, or let Codex choose it based on the Skill description when the request involves converting vague tasks into structured prompts or agent task specifications.
+
+## ChatGPT Skills Upload
+
+Build the uploadable Skill package:
+
+```bash
+python scripts/package_skill.py
+```
+
+On Windows:
+
+```bash
+py scripts/package_skill.py
+```
+
+This creates:
+
+```text
+dist/promptforge-skill.zip
+```
+
+Upload that zip file to ChatGPT Skills. Review any externally downloaded Skill before uploading it. The platform may also perform its own safety scan after upload.
+
+## OpenAI API Skill Bundle
+
+API users can use:
+
+```text
+dist/promptforge-skill.zip
+```
+
+as a Skill bundle with `SKILL.md` as the manifest. This repository does not include API keys or complete API call code.
 
 ## What Problem This Solves
 
@@ -59,45 +101,27 @@ This project is not intended to:
 
 ```text
 promptforge-skill/
-|-- README.md
-|-- LICENSE
-|-- AGENTS.md
-|-- CONTRIBUTING.md
-|-- CHANGELOG.md
-|-- scripts/
-|   |-- prompt_linter.py
-|   `-- lint_all.py
-|-- skill/
-|   `-- promptforge/
-|       |-- SKILL.md
-|       |-- references/
-|       `-- examples/
-|-- tests/
-`-- .github/
-    `-- workflows/
-        `-- lint.yml
+├── .agents/
+│   └── skills/
+│       └── promptforge/
+│           ├── SKILL.md
+│           ├── references/
+│           └── examples/
+├── .github/
+├── scripts/
+├── tests/
+├── README.md
+├── CONTRIBUTING.md
+├── CHANGELOG.md
+├── LICENSE
+└── AGENTS.md
 ```
 
 ## Installation
 
-No package install is required for the core Skill.
+No package install is required for Codex repo-local use. Keep `.agents/skills/promptforge/` in the repository root and start Codex from the same root.
 
-To copy the Skill into another workspace:
-
-1. Copy `skill/promptforge/` into your local skills directory or project skill folder.
-2. Keep the `references/` and `examples/` subfolders alongside `SKILL.md`.
-3. Run the linter with Python 3 when validating prompt files.
-
-Example layout in another repository:
-
-```text
-your-project/
-`-- skill/
-    `-- promptforge/
-        |-- SKILL.md
-        |-- references/
-        `-- examples/
-```
+To reuse the Skill in another repo-local setup, copy `.agents/skills/promptforge/` into that repository while keeping `SKILL.md`, `references/`, and `examples/` together.
 
 ## How to Use
 
@@ -113,12 +137,12 @@ Basic workflow:
 8. Run risk checks before final output.
 9. Return the final prompt and require confirmation before risky execution.
 
-## Running the Linter
+## Running the Linter and Packager
 
 Check one prompt or example:
 
 ```bash
-python scripts/prompt_linter.py skill/promptforge/examples/codex-project.md
+python scripts/prompt_linter.py .agents/skills/promptforge/examples/codex-project.md
 ```
 
 Run the batch linter for examples and tests:
@@ -127,14 +151,23 @@ Run the batch linter for examples and tests:
 python scripts/lint_all.py
 ```
 
-On Windows, if `python` points to the Windows Store placeholder, try:
+Build the Skill zip package:
 
 ```bash
-py scripts/prompt_linter.py skill/promptforge/examples/codex-project.md
-py scripts/lint_all.py
+python scripts/package_skill.py
 ```
 
-The linter uses only the Python standard library and does not call external APIs.
+On Windows:
+
+```bash
+py scripts/prompt_linter.py .agents/skills/promptforge/examples/codex-project.md
+py scripts/lint_all.py
+py scripts/package_skill.py
+```
+
+If Windows `python` points to the Microsoft Store placeholder, try `py` or use the full path to an installed Python executable.
+
+The scripts use only the Python standard library and do not call external APIs.
 
 ## Example Input and Output
 
@@ -188,12 +221,13 @@ Do not add experimental features to the core Skill. Do not turn Computer Use int
 
 ## Included Files
 
-- `skill/promptforge/SKILL.md`: the core skill definition
-- `skill/promptforge/references/`: taxonomy, rubric, risk rules, and output templates
-- `skill/promptforge/examples/`: worked examples across common task types
+- `.agents/skills/promptforge/SKILL.md`: the core skill definition
+- `.agents/skills/promptforge/references/`: taxonomy, rubric, risk rules, and output templates
+- `.agents/skills/promptforge/examples/`: worked examples across common task types
 - `tests/`: vague task inputs, expected output characteristics, and smoke test
 - `scripts/prompt_linter.py`: a simple local prompt quality checker
 - `scripts/lint_all.py`: batch linting for examples and tests
+- `scripts/package_skill.py`: package builder for `dist/promptforge-skill.zip`
 
 ## Version
 

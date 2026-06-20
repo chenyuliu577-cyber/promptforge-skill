@@ -6,9 +6,9 @@ This repository is maintained for reusable Skill design, not for feature sprawl.
 
 - Do not add dependencies without a concrete maintenance or quality reason.
 - Do not mix experimental features into the core Skill workflow.
-- If `skill/promptforge/SKILL.md` changes, update the examples and tests in the same change.
+- If `.agents/skills/promptforge/SKILL.md` changes, update the examples and tests in the same change.
 - Keep all documentation clear, concise, and executable.
-- Do not describe this project as an "automatic万能提示词神器" or an all-purpose magic prompt generator.
+- Do not describe this project as an automatic universal prompt generator or an all-purpose magic prompt tool.
 - The core focus is task specification, critical review, risk control, and final executable prompts.
 
 ## Repository Priorities

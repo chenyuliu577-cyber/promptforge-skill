@@ -20,6 +20,7 @@ ENV/
 logs/
 
 # Local test output
+dist/
 tmp/
 temp/
 out/

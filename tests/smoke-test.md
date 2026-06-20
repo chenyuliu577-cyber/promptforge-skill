@@ -4,7 +4,7 @@ This smoke test checks whether the `promptforge` Skill produces a structured, co
 
 ## Manual Test Procedure
 
-1. Open `skill/promptforge/SKILL.md`.
+1. Open `.agents/skills/promptforge/SKILL.md`.
 2. Use the workflow in the Skill against the vague input below.
 3. Produce a final prompt or agent task specification.
 4. Compare the result against the pass criteria.
@@ -13,7 +13,7 @@ This smoke test checks whether the `promptforge` Skill produces a structured, co
 ## Test Input
 
 ```text
-帮我让 Codex 修改我的网页
+Help me make Codex update my website.
 ```
 
 ## Passing Output Must Include
@@ -47,7 +47,7 @@ python scripts/prompt_linter.py path/to/generated-prompt.md
 For the built-in Codex example:
 
 ```bash
-python scripts/prompt_linter.py skill/promptforge/examples/codex-project.md
+python scripts/prompt_linter.py .agents/skills/promptforge/examples/codex-project.md
 ```
 
 A passing result should include a high score and no major missing sections. If the linter reports missing items, revise the generated prompt before treating it as ready.

@@ -6,7 +6,7 @@ Thank you for helping improve `promptforge-skill`. This project is intentionally
 
 PromptForge turns vague user requests into structured, executable, and verifiable prompts or agent task specifications. The focus is task specification, critical review, risk control, and final prompts that another agent can actually follow.
 
-Do not present the project as a universal prompt machine or "万能提示词神器".
+Do not present the project as a universal prompt machine or magic prompt generator.
 
 ## Welcome Contributions
 
@@ -36,7 +36,7 @@ Do not present the project as a universal prompt machine or "万能提示词神�
 
 ## Skill Modification Rules
 
-- Keep `skill/promptforge/SKILL.md` concise and directive.
+- Keep `.agents/skills/promptforge/SKILL.md` concise and directive.
 - Preserve the core workflow: parse, classify, extract, identify gaps, assume safely, draft, critique, revise, check risk, output with confirmation.
 - If `SKILL.md` changes, review `examples`, `references`, and `tests` in the same pull request.
 - Do not add Computer Use as a default path.

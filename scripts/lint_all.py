@@ -11,7 +11,7 @@ from prompt_linter import read_text, score_prompt
 
 MIN_SCORE = 8
 TARGET_DIRS = [
-    Path("skill/promptforge/examples"),
+    Path(".agents/skills/promptforge/examples"),
     Path("tests"),
 ]
 
