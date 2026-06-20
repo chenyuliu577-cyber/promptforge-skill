@@ -31,6 +31,7 @@ Requirements:
 - identify any missing data or unsupported claims instead of inventing them
 - maintain formal, concise language
 - if the instructor format is unknown, note that the structure is a reasonable default
+- quality standard: every conclusion must be traceable to provided experiment data
 
 Do not:
 - fabricate measurements, citations, or conclusions

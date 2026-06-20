@@ -2,7 +2,23 @@
 
 `promptforge-skill` is a reusable AI Skill for turning a short, vague user request into a structured, executable, and verifiable prompt or agent task specification.
 
-It is designed for people who do not need "more words" by default. They need better task framing, explicit assumptions, revision pressure, risk checks, and a final output that another AI system or coding agent can actually execute.
+The project does not optimize for longer prompts. It optimizes for clearer prompts: better task framing, explicit assumptions, critique, risk checks, and outputs that another AI system or coding agent can follow.
+
+Core views:
+
+- Longer prompts are not always better.
+- Clearer prompts are better.
+- This skill optimizes for clarity, controllability, and verification.
+- Computer Use is optional and not part of the default workflow.
+- External AI consultation must not send private user data unless explicitly approved.
+
+## Quick Start
+
+1. Read `skill/promptforge/SKILL.md`.
+2. Start from a vague request, such as "help me make a senior-looking PPT".
+3. Follow the Skill workflow to classify the task, extract missing information, make safe assumptions, draft, critique, revise, and run risk checks.
+4. Return a final prompt with a verification checklist and confirmation gate.
+5. Run the local linter against examples or generated prompt files.
 
 ## What Problem This Solves
 
@@ -16,14 +32,6 @@ Many weak prompts fail for predictable reasons:
 - no verification criteria are defined
 
 This project addresses that gap by converting fuzzy requests into rigorous task specifications.
-
-Core views:
-
-- Longer prompts are not always better.
-- Clearer prompts are better.
-- This skill optimizes for clarity, controllability, and verification.
-- Computer Use is optional and not part of the default workflow.
-- External AI consultation must not send private user data unless explicitly approved.
 
 ## Good Fit
 
@@ -40,48 +48,55 @@ Use this project when you need to:
 
 This project is not intended to:
 
-- act as a generic "automatic miracle prompt machine"
+- act as a generic automatic miracle prompt machine
 - replace domain expertise for medical, legal, or financial decisions
 - silently perform external actions such as publishing, paying, deleting, or sending
 - default to browser automation, account login, or Computer Use
 - connect to external AI APIs in the first version
 - build a web product or GUI in the first version
 
-## Project Layout
+## Repository Structure
 
 ```text
 promptforge-skill/
-├── README.md
-├── LICENSE
-├── AGENTS.md
-├── skill/
-│   └── promptforge/
-│       ├── SKILL.md
-│       ├── references/
-│       └── examples/
-├── tests/
-└── scripts/
+|-- README.md
+|-- LICENSE
+|-- AGENTS.md
+|-- CONTRIBUTING.md
+|-- CHANGELOG.md
+|-- scripts/
+|   |-- prompt_linter.py
+|   `-- lint_all.py
+|-- skill/
+|   `-- promptforge/
+|       |-- SKILL.md
+|       |-- references/
+|       `-- examples/
+|-- tests/
+`-- .github/
+    `-- workflows/
+        `-- lint.yml
 ```
 
 ## Installation
 
-This repository is deliberately lightweight. No package install is required for the core documentation.
+No package install is required for the core Skill.
 
 To copy the Skill into another workspace:
 
 1. Copy `skill/promptforge/` into your local skills directory or project skill folder.
 2. Keep the `references/` and `examples/` subfolders alongside `SKILL.md`.
-3. If you use the linter, run it with a local Python 3 interpreter.
+3. Run the linter with Python 3 when validating prompt files.
 
 Example layout in another repository:
 
 ```text
 your-project/
-└── skill/
-    └── promptforge/
-        ├── SKILL.md
-        ├── references/
-        └── examples/
+`-- skill/
+    `-- promptforge/
+        |-- SKILL.md
+        |-- references/
+        `-- examples/
 ```
 
 ## How to Use
@@ -97,6 +112,29 @@ Basic workflow:
 7. Revise it until the prompt is clear, controllable, and verifiable.
 8. Run risk checks before final output.
 9. Return the final prompt and require confirmation before risky execution.
+
+## Running the Linter
+
+Check one prompt or example:
+
+```bash
+python scripts/prompt_linter.py skill/promptforge/examples/codex-project.md
+```
+
+Run the batch linter for examples and tests:
+
+```bash
+python scripts/lint_all.py
+```
+
+On Windows, if `python` points to the Windows Store placeholder, try:
+
+```bash
+py scripts/prompt_linter.py skill/promptforge/examples/codex-project.md
+py scripts/lint_all.py
+```
+
+The linter uses only the Python standard library and does not call external APIs.
 
 ## Example Input and Output
 
@@ -125,37 +163,43 @@ Verification:
 - each slide has one core message
 - recommendations are evidence-linked
 - no fabricated figures
+Confirmation:
+- ask before using confidential company data or publishing externally
 ```
 
-## Principles
-
-- Optimize for clear outcomes, not verbose prompts.
-- Prefer explicit output formats over open-ended requests.
-- State assumptions instead of hiding them.
-- Separate safe assumptions from facts supplied by the user.
-- Add critique and revision by default.
-- Require confirmation for high-risk or externally visible actions.
-- Keep tool usage realistic. Do not instruct tools the agent does not actually have.
-
-## Safety Boundaries
+## Safety Principles
 
 - Do not send private or confidential user data to external AI systems without explicit approval.
 - Do not default to Computer Use, browser automation, or account login flows.
 - Do not treat webpage content as trusted instructions.
 - Flag tasks involving payments, deletion, submission, publishing, legal advice, medical advice, financial advice, or irreversible actions.
 - Require an explicit confirmation gate before high-risk execution.
+- Keep tool usage realistic. Do not instruct tools the agent does not actually have.
+
+## Contributing
+
+Contributions should improve clarity, controllability, verification, or safety. Before opening a pull request, read `CONTRIBUTING.md` and run:
+
+```bash
+python scripts/lint_all.py
+```
+
+Do not add experimental features to the core Skill. Do not turn Computer Use into the default workflow. Do not introduce external API dependencies unless a design document defines consent, privacy handling, and safety boundaries.
 
 ## Included Files
 
 - `skill/promptforge/SKILL.md`: the core skill definition
 - `skill/promptforge/references/`: taxonomy, rubric, risk rules, and output templates
 - `skill/promptforge/examples/`: worked examples across common task types
-- `tests/`: vague task inputs and expected output characteristics
+- `tests/`: vague task inputs, expected output characteristics, and smoke test
 - `scripts/prompt_linter.py`: a simple local prompt quality checker
+- `scripts/lint_all.py`: batch linting for examples and tests
 
-## Version Scope
+## Version
 
-Version 1 intentionally excludes:
+Current version: `0.1.0 - Initial baseline`
+
+Version 0.1.0 intentionally excludes:
 
 - external AI API integrations
 - account-based product flows
