@@ -34,27 +34,47 @@ Do not blindly lengthen the prompt to raise the score. Better prompts are often 
 - Is the expected deliverable format defined?
 - Can the output be checked against concrete structure requirements?
 
-### 4. constraint coverage
+### 4. execution readiness
+
+- Does the prompt specify concrete deliverables, file paths, output format, and acceptance checks?
+- For Codex or document-generation tasks, can the agent act without guessing where to write results?
+
+### 5. constraint coverage
 
 - Does the prompt include relevant limits, priorities, exclusions, and scope boundaries?
 - Are important tradeoffs made visible?
 
-### 5. tool realism
+### 6. tool realism
 
 - Does the prompt use only tools, permissions, and workflows that are realistically available?
 - Does it avoid pretending the agent can browse, log in, or call tools it does not have?
 
-### 6. safety
+### 7. safety
 
 - Does the prompt account for privacy, external effects, sensitive data, and risky domains?
 - Are approval gates included where appropriate?
 
-### 7. verification
+### 8. verification
 
 - Are there clear quality checks, acceptance criteria, or review steps?
 - Can another reviewer tell whether the task was done well?
 
-### 8. concision
+### 9. anti-template strength
+
+- Does the prompt prevent generic AI templates, vague section titles, and empty business jargon?
+- For slides and reports, does it require concrete judgments instead of category labels?
+
+### 10. decision sharpness
+
+- For slides, reports, and proposals, does the prompt require conclusion-style titles, one core judgment per section, and deliberate information selection?
+- Does it prevent filler pages or unsupported claims?
+
+### 11. confirmation quality
+
+- Does the prompt distinguish a default draft from formal delivery?
+- Are confirmations specific, such as topic, audience, materials, brand rules, data sources, or external publication boundaries?
+
+### 12. concision
 
 - Is the prompt as short as possible without losing control?
 - Has unnecessary wording been removed?

@@ -75,6 +75,46 @@ Confirmation Gate
 - Ask before broad refactors, deployment, publishing, destructive changes, or external service setup.
 ```
 
+## Codex File-Delivery Template
+
+```text
+Task Analysis
+- Task type: file-based generation
+- Goal:
+- Output directory:
+- Deliverables:
+
+Final Prompt
+Work in the current repository.
+Objective: [specific objective].
+
+Create or update these files:
+- `[output directory]/[file 1]`: [purpose]
+- `[output directory]/[file 2]`: [purpose]
+- `[output directory]/[file 3]`: [purpose]
+
+Requirements:
+- write the requested files to disk
+- do not answer only in chat
+- do not create empty files
+- do not write TODO-only placeholders
+- define acceptance criteria for each file
+- keep generated test outputs out of source commits unless explicitly requested
+
+Do not:
+- commit local test output directories such as `output/` or `dist/`
+- invent data, credentials, customer examples, or external facts
+
+Verification Checklist
+- each file exists at the specified path
+- each file has usable content
+- the output directory is not accidentally staged as source if it is test output
+- final response lists created files and their purpose
+
+Confirmation Gate
+- Ask before turning draft artifacts into formal deliverables, committing generated outputs, publishing, or sharing externally.
+```
+
 ## PPT Generation Template
 
 ```text
@@ -83,23 +123,29 @@ Task Analysis
 - Audience:
 - Goal:
 - Slide count target:
+- Output files:
 
 Final Prompt
-Create a presentation plan for [audience] about [topic].
+Create a presentation production spec for [audience] about [topic].
 Requirements:
+- write outputs to [output directory]
+- include a task spec, page-by-page plan, and next-agent prompt when file delivery is requested
 - [N]-slide structure
-- one key message per slide
-- concise executive title for each slide
+- one core judgment per slide
+- conclusion-style title for each slide
 - specify visuals, charts, or supporting evidence
 - maintain [tone/style]
+- mark missing data as `[待补充：specific item]`
+- run self-critique before finalizing and revise once
 
 Verification Checklist
 - each slide has a clear takeaway
 - narrative flows logically
 - unsupported claims are avoided
+- generic titles and empty jargon are avoided
 
 Confirmation Gate
-- Ask before using confidential data, exporting for clients, or publishing externally.
+- Ask before creating formal PPTX, using confidential data, applying brand assets, exporting for clients, or publishing externally.
 ```
 
 ## Image Generation Template

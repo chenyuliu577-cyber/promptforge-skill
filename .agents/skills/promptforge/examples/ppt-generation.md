@@ -2,66 +2,158 @@
 
 ## User's Original Simple Request
 
-帮我做一个高级 PPT。
+Help me make a premium PPT.
 
 ## Task Analysis
 
 - Primary task type: slides
-- Objective: produce a presentation specification instead of a vague design request
-- Missing data: audience, topic, duration, language, brand style, desired slide count
+- Secondary task type: document generation
+- Objective: convert a vague PPT request into executable file-based deliverables for a high-quality business presentation specification
+- Current limitation: the user has not provided the topic, audience, use case, materials, brand rules, data sources, or delivery format
+- Required output: structured Markdown files, not a `.pptx`, unless the user later confirms PPTX generation and provides the required assets
 
-## Key Assumptions
+## Missing Information
 
-- "高级" likely means polished, executive-facing, and concise
-- the user probably wants a business-quality deck rather than a decorative one
-- a safe default is to request or assume a 10-12 slide structure unless specified otherwise
+### Blocking Information
 
-## Optimized Final Prompt
+These are required before making a formal client-facing or external deck:
+
+- presentation topic
+- target audience
+- use case
+- target decision or action
+- real materials, data, brand assets, or template
+
+### Strong-Impact Information
+
+These can be defaulted, but quality will be materially affected:
+
+- expected speaking time
+- preferred slide count
+- industry or business context
+- presentation type: report, proposal, pitch, defense, or training
+- chart and data needs
+- speaker notes requirement
+
+### Fine-Tuning Information
+
+These can be supplied later:
+
+- color preference
+- font preference
+- animation preference
+- image style
+- footer, page number, and logo placement
+
+## Assumptions
+
+- default type: Chinese-style senior business report deck
+- default length: 10-12 slides
+- default audience: management, clients, investors, or other non-technical decision-makers
+- default goal: help the audience understand the issue, judge value, and choose the next action
+- default style: restrained, professional, conclusion-first, moderate information density
+- default visual direction: low-saturation colors, strong hierarchy, minimal decoration, structured diagrams and comparisons
+- default data rule: missing data must be marked as `[待补充：data name]`; do not invent statistics, cases, market size, growth rates, or customer feedback
+
+These assumptions are used because a business-report structure is the most reusable starting point when the actual scenario is unknown. They are placeholders, not facts.
+
+## Final Prompt
 
 ```text
-Create a presentation plan for an executive-style PPT.
+You are a rigorous presentation planning agent working in the current project directory.
 
-Objective:
-Turn the user's topic into a concise, polished deck suitable for decision-makers.
+Task:
+Convert the vague request "Help me make a premium PPT" into a structured, executable, and reviewable business presentation production spec.
 
-Assumptions:
-- audience is business stakeholders unless stated otherwise
-- slide count target is 10-12
-- tone is professional, concise, and insight-led
+Do not generate a `.pptx` file yet. The user has not provided the topic, audience, materials, brand rules, template, or delivery format.
 
-Requirements:
-- define the audience, deck objective, and one-line core message
-- propose a slide-by-slide outline with one key point per slide
-- recommend suitable visuals, charts, or diagrams for each slide
-- specify title style, narrative flow, and final recommendation slide
-- if important context is missing, list it clearly before finalizing
+Create an `output/` directory and write these files:
 
-Do not:
-- create decorative filler slides
-- add unsupported statistics
-- confuse visual polish with strategic clarity
+1. `output/ppt_task_spec.md`
+   Purpose: define the task goal, missing information, default assumptions, visual rules, risk boundaries, self-critique, acceptance criteria, and confirmation gate.
 
-Verification Checklist:
-- every slide has a clear takeaway
-- the deck builds toward a decision or recommendation
-- unnecessary text density is avoided
+2. `output/page_by_page_plan.md`
+   Purpose: provide a 10-12 slide page-level plan. Each slide must include:
+   - page number
+   - conclusion-style title
+   - one core judgment
+   - 3-5 short body points
+   - main visual structure
+   - data and material needs
+   - speaker notes
+   - production warning
+
+3. `output/prompt_for_next_agent.md`
+   Purpose: provide a copyable prompt for another AI, PPT producer, or Codex agent to continue the work.
+
+Missing information handling:
+- classify missing inputs as Blocking, Strong-Impact, or Fine-Tuning
+- proceed with defaults only for a first draft
+- never present assumptions as facts
+- mark all unknown data as `[待补充：specific item]`
+
+Definition of "premium PPT":
+- sharp point of view
+- compressed structure
+- deliberate information selection
+- visuals that support judgment
+- no filler slides
+- directly usable by a PPT producer
+
+Anti-template rules:
+- do not use generic slide titles such as "Background", "Pain Points", "Solution", "Core Advantages", "Market Analysis", "Implementation Path", "Risk Control", "Future Outlook", or "Summary"
+- every title must contain a concrete judgment
+- avoid empty terms such as "empowerment", "ecosystem", "matrix", "full-chain", "platform base", or "intelligent upgrade" unless the prompt defines the concrete meaning and actions
+
+Self-Critique Before Finalizing:
+Before writing the final files, critique the draft against these questions and revise once:
+- does it still look like a generic AI template?
+- does every slide have a clear judgment?
+- are there any empty phrases that cannot be executed?
+- are assumptions disguised as facts?
+- can a PPT producer start making pages from the output?
+
+Confirmation Gate:
+The default plan may be used as a first-draft skeleton. Before creating a formal PPTX or external-facing deck, require user confirmation of:
+- topic
+- audience
+- use case
+- material scope
+- delivery format
+- brand rules
+- real data sources
+- public information boundaries
+
+Quality constraints:
+- do not answer only in chat
+- do not create empty files
+- do not write TODO-only placeholders
+- do not invent data, customer cases, market size, or growth rates
+- each slide must have exactly one core judgment
+- each slide must specify a main visual structure
+- each slide must include a production warning
 ```
 
-## Risk Check
+## Verification Checklist
 
-- do not invent statistics, sources, client facts, or business results
-- do not use confidential company context unless the user provides it
-- do not treat visual polish as a substitute for a clear argument
+- output files are written under `output/`
+- `output/ppt_task_spec.md` separates Blocking, Strong-Impact, and Fine-Tuning missing information
+- `output/page_by_page_plan.md` contains 10-12 slides
+- every slide has a conclusion-style title and one core judgment
+- every slide includes body structure, main visual, material needs, speaker notes, and production warning
+- missing data is marked with `[待补充：...]`
+- no fake statistics, customer cases, market sizes, or growth rates are introduced
+- generic slide titles and empty business jargon are avoided
+- self-critique is included and the output is revised once before finalization
 
-## User Confirmation Point
+## Confirmation Gate
 
-No special confirmation is required for a draft outline. Ask for confirmation before creating a final client-facing deck, using private company data, or publishing/exporting externally.
+The default output can be used as a first-draft skeleton only. Before generating a formal PPTX or external-facing deck, ask the user to confirm topic, audience, use case, material scope, delivery format, brand rules, real data sources, and public information boundaries.
 
 ## Checklist
 
-- audience and objective are surfaced
-- slide count and structure are controlled
-- visual guidance is included
-- unsupported claims are prohibited
-- final review criteria are explicit
-- confirmation status is explicit
+- task is specified as file-based delivery
+- missing information is prioritized by severity
+- default assumptions are labeled as assumptions
+- anti-template rules are explicit
+- formal delivery requires confirmation

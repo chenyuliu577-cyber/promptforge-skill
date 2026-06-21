@@ -85,6 +85,8 @@ Construction guidance:
 - Use short sections and imperative instructions.
 - Avoid pretending the agent has tools or permissions it does not have.
 - Keep the prompt concise once control and verification are sufficient.
+- For Codex, coding-agent, document-generation, and slide-generation tasks, specify deliverables, file paths, output formats, and acceptance checks.
+- For content-generation tasks, prohibit generic templates, vague section titles, and empty jargon when they would weaken the result.
 
 # Critique Rules
 
@@ -158,7 +160,7 @@ Return these sections:
 3. Assumptions: safe assumptions used to proceed.
 4. Final Prompt: the optimized prompt or agent task specification.
 5. Verification Checklist: concrete checks for quality, completeness, and safety.
-6. Confirmation Gate: either the required user confirmation or "No special confirmation required."
+6. Confirmation Gate: distinguish what can proceed as a default draft from what needs user confirmation before formal delivery.
 
 # Behavior Guidelines
 
